@@ -1,0 +1,32 @@
+﻿<Window x:Class="Time_organization.NewActivityWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Time_organization"
+        mc:Ignorable="d"
+        Title="Nowa aktywność" Height="149.143" Width="293.143">
+    <StackPanel>
+        <Label Content="Nazwa:"/>
+        <ComboBox x:Name="activityName_comboBox">
+            <ComboBoxItem>Śniadanie</ComboBoxItem>
+            <ComboBoxItem>Obiad</ComboBoxItem>
+            <ComboBoxItem>Naczynia</ComboBoxItem>
+            <Separator/>
+            <ComboBoxItem>Blender - nauka</ComboBoxItem>
+            <ComboBoxItem>Blender - projekt</ComboBoxItem>
+            <Separator/>
+            <ComboBoxItem>C# - nauka</ComboBoxItem>
+            <ComboBoxItem>C# - projekt</ComboBoxItem>
+            <Separator/>
+            <ComboBoxItem>Cosinus - obróbka notatek</ComboBoxItem>
+            <ComboBoxItem>Cosinus - praca domowa</ComboBoxItem>
+            <Separator/>
+            <ComboBoxItem>Modelarstwo</ComboBoxItem>
+        </ComboBox>
+        <Label Content="Zakładany czas (w minutach)"/>
+        <TextBox x:Name="time_textbox"/>
+        <Button x:Name="startActivity_button"
+            Content="Rozpocznij" Click="startActivity_button_Click"/>
+    </StackPanel>
+</Window>

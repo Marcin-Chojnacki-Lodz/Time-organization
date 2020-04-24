@@ -1,0 +1,35 @@
+﻿<Window x:Class="Time_organization.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Time_organization"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="227" Width="395"
+        ResizeMode="NoResize"
+        Loaded="Window_Loaded">
+    <WrapPanel>
+        <StackPanel Width="140px">
+            <Label Content="Aktualnie:"/>
+            <Label x:Name="activityName_label" 
+                   Content="Tekst"/>
+            <Label Content="Czas trwania:"/>
+            <Label x:Name="durationTime_label"
+                Content="    1h 10min 11s"/>
+            <ProgressBar x:Name="progress_progressBar"
+                Minimum="0" Maximum="100" Value="25" Height="10px"/>
+            <Rectangle Height="20px"/>
+            <Button x:Name="newActivity_button"
+                Content="Nowa aktywność" Click="newActivity_button_Click"/>
+            <Button x:Name="end_button"
+                Content="Zakończ" Click="end_button_Click"/>
+        </StackPanel>
+        <Rectangle Height="196" Width="10px" Fill="White"/>
+        <StackPanel>
+            <Label Content="Historia dnia dzisiejszego:"/>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Height="170" Width="225">
+                <ItemsControl ItemsSource="{Binding history}"/>
+            </ScrollViewer>
+        </StackPanel>
+    </WrapPanel>
+</Window>
