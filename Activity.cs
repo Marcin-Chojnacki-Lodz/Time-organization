@@ -10,7 +10,8 @@ namespace Time_organization
     {
         public string Name { get; set; }
         public DateTime StartTime { get; set; }
-        public int MinutesDuration { get; set; }
+        public int PlannedMinutesDuration { get; set; }
+        public int ActualMinutesDuration { get; set; }
 
         public Activity()
         {

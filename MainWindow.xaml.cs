@@ -24,7 +24,8 @@ namespace Time_organization
     {
         Activity _activity;
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        Stack<string> _history;
+        private ObservableCollection<string> _history = new ObservableCollection<string>();
+        private bool msgBxShow;
 
         public MainWindow()
         {
@@ -33,20 +34,22 @@ namespace Time_organization
             activityName_label.Content = "";
             durationTime_label.Content = "";
             progress_progressBar.Value = 0;
-            //history_stackPanel.Children.Clear();
 
-            _history = new Stack<string>();
-            //history_stackPanel.DataContext = _history;
+            DataContext = _history;
         }
 
-        public MainWindow(Activity activity, Stack<string> history)
+        public MainWindow(Activity activity, ObservableCollection<string> history)
         {
             InitializeComponent();
 
             _activity = activity;
             _history = history;
             activityName_label.Content = _activity.Name;
-            progress_progressBar.Maximum = _activity.MinutesDuration * 60;
+            progress_progressBar.Maximum = _activity.PlannedMinutesDuration * 60;
+
+            DataContext = _history;
+
+            msgBxShow = true;
 
             updateTimes();
         }
@@ -54,7 +57,10 @@ namespace Time_organization
         private void newActivity_button_Click(object sender, RoutedEventArgs e)
         {
             if (_activity != null)
-                _history.Push(_activity.Name);
+            {
+                _activity.ActualMinutesDuration = _activity.secondsInProgress() / 60;
+                _history.Add($"{_activity.Name} - {_activity.StartTime.ToString("HH:mm")}\n Czas trwania: {_activity.ActualMinutesDuration} min");
+            }
 
             NewActivityWindow newActivityWindow = new NewActivityWindow(_history);
 
@@ -63,13 +69,12 @@ namespace Time_organization
             newActivityWindow.Show();
         }
 
-        private void end_button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
+            this.Left = desktopWorkingArea.Right - this.Width;
+            this.Top = desktopWorkingArea.Bottom - this.Height;
+
             if (_activity != null)
             {
                 dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
@@ -85,6 +90,9 @@ namespace Time_organization
             CommandManager.InvalidateRequerySuggested();
         }
 
+        /// <summary>
+        /// Updates time in progress bar, window title and in content of window
+        /// </summary>
         private void updateTimes()
         {
             int secondsInProgress = _activity.secondsInProgress();
@@ -96,6 +104,21 @@ namespace Time_organization
 
             durationTime_label.Content = $"    {hours} h {minutes} min {seconds} s";
             progress_progressBar.Value = secondsInProgress;
+
+            if (secondsInProgress / 60 == _activity.PlannedMinutesDuration && msgBxShow)
+            {
+                MessageBox.Show("Założony czas dobiegł końca");
+            }
+
+            if (secondsInProgress / 60 >= _activity.PlannedMinutesDuration)
+            {
+                this.Title = "Następna aktywność. :)";
+                msgBxShow = false;
+            }
+            else
+            {
+                this.Title = $"{hours}:{minutes}:{seconds}";
+            }
         }
     }
 }

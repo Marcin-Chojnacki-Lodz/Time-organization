@@ -20,24 +20,27 @@ namespace Time_organization
     /// </summary>
     public partial class NewActivityWindow : Window
     {
-        Stack<string> _history;
-
-        public NewActivityWindow(Stack<string> history)
+        private ObservableCollection<string> _history;
+        public NewActivityWindow(ObservableCollection<string> history)
         {
             InitializeComponent();
             _history = history;
+
+            var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
+            this.Left = desktopWorkingArea.Right - this.Width;
+            this.Top = desktopWorkingArea.Bottom - this.Height;
         }
 
         private void startActivity_button_Click(object sender, RoutedEventArgs e)
         {
             int timeDuration = 0;
 
-            if (activityName_comboBox.SelectedIndex > 0 && int.TryParse(time_textbox.Text, out timeDuration) && timeDuration > 0)
+            if (activityName_comboBox.SelectedIndex >= 0 && int.TryParse(time_textbox.Text, out timeDuration) && timeDuration > 0)
             {
                 Activity activity = new Activity()
                 {
                     Name = activityName_comboBox.Text,
-                    MinutesDuration = timeDuration
+                    PlannedMinutesDuration = timeDuration
                 };
 
                 MainWindow mainWindow = new MainWindow(activity, _history);

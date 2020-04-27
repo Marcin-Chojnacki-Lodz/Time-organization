@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Time_organization"
         mc:Ignorable="d"
-        Title="Nowa aktywność" Height="149.143" Width="293.143">
+        Title="Nowa aktywność" Height="149.143" Width="293.143"
+        ResizeMode="NoResize">
     <StackPanel>
         <Label Content="Nazwa:"/>
         <ComboBox x:Name="activityName_comboBox">
@@ -13,16 +14,20 @@
             <ComboBoxItem>Obiad</ComboBoxItem>
             <ComboBoxItem>Naczynia</ComboBoxItem>
             <Separator/>
-            <ComboBoxItem>Blender - nauka</ComboBoxItem>
-            <ComboBoxItem>Blender - projekt</ComboBoxItem>
+            <ComboBoxItem>Blender</ComboBoxItem>
+            <ComboBoxItem>Fusion360</ComboBoxItem>
             <Separator/>
             <ComboBoxItem>C# - nauka</ComboBoxItem>
             <ComboBoxItem>C# - projekt</ComboBoxItem>
             <Separator/>
-            <ComboBoxItem>Cosinus - obróbka notatek</ComboBoxItem>
-            <ComboBoxItem>Cosinus - praca domowa</ComboBoxItem>
+            <ComboBoxItem>Cosinus</ComboBoxItem>
             <Separator/>
             <ComboBoxItem>Modelarstwo</ComboBoxItem>
+            <ComboBoxItem>Gra komputerowa</ComboBoxItem>
+            <ComboBoxItem>Pianino</ComboBoxItem>
+            <ComboBoxItem>Ćwiczenia fizyczne</ComboBoxItem>
+            <Separator/>
+            <ComboBoxItem>Inne</ComboBoxItem>
         </ComboBox>
         <Label Content="Zakładany czas (w minutach)"/>
         <TextBox x:Name="time_textbox"/>
