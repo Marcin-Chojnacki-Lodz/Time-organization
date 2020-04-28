@@ -12,17 +12,19 @@ namespace Time_organization
         public DateTime StartTime { get; set; }
         public int PlannedMinutesDuration { get; set; }
         public int ActualMinutesDuration { get; set; }
-        public int Color { get; set; }
+        public string Note { get; set; }
 
         public Activity()
         {
             StartTime = DateTime.Now;
-            Color = Convert.ToInt32("FF0000", 16);
         }
 
         public override string ToString()
         {
-            return $"{this.Name} - {this.StartTime.ToString("HH:mm")}\n Czas trwania: {this.ActualMinutesDuration} min";
+            if (Note != null && Note != "")
+                return $"{Name} - {StartTime.ToString("HH:mm")}\n Czas trwania: {ActualMinutesDuration} min\n {Note}";
+            else
+                return $"{Name} - {StartTime.ToString("HH:mm")}\n Czas trwania: {ActualMinutesDuration} min";
         }
 
         /// <summary>
@@ -31,7 +33,7 @@ namespace Time_organization
         /// <returns>Amount of time activity takes place until now</returns>
         public int secondsInProgress()
         {
-            return (int) (DateTime.Now - StartTime).TotalSeconds;
+            return (int)(DateTime.Now - StartTime).TotalSeconds;
         }
     }
 }

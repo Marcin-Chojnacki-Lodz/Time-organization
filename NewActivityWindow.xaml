@@ -5,33 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Time_organization"
         mc:Ignorable="d"
-        Title="Nowa aktywność" Height="149.143" Width="293.143"
+        Title="Nowa aktywność" Height="201.143" Width="293.143"
         ResizeMode="NoResize">
     <StackPanel>
         <Label Content="Nazwa:"/>
-        <ComboBox x:Name="activityName_comboBox">
-            <ComboBoxItem>Śniadanie</ComboBoxItem>
-            <ComboBoxItem>Obiad</ComboBoxItem>
-            <ComboBoxItem>Naczynia</ComboBoxItem>
-            <Separator/>
-            <ComboBoxItem>Blender</ComboBoxItem>
-            <ComboBoxItem>Fusion360</ComboBoxItem>
-            <Separator/>
-            <ComboBoxItem>C# - nauka</ComboBoxItem>
-            <ComboBoxItem>C# - projekt</ComboBoxItem>
-            <Separator/>
-            <ComboBoxItem>Cosinus</ComboBoxItem>
-            <Separator/>
-            <ComboBoxItem>Modelarstwo</ComboBoxItem>
-            <ComboBoxItem>Gra komputerowa</ComboBoxItem>
-            <ComboBoxItem>Pianino</ComboBoxItem>
-            <ComboBoxItem>Ćwiczenia fizyczne</ComboBoxItem>
-            <ComboBoxItem>Pomoc innym</ComboBoxItem>
-            <Separator/>
-            <ComboBoxItem>Inne</ComboBoxItem>
+        <ComboBox x:Name="activityName_comboBox" ItemsSource="{Binding}">
+
         </ComboBox>
         <Label Content="Zakładany czas (w minutach)"/>
         <TextBox x:Name="time_textbox"/>
+        <Label Content="Notatka"/>
+        <TextBox x:Name="note_textbox"/>
         <Button x:Name="startActivity_button"
             Content="Rozpocznij" Click="startActivity_button_Click"/>
     </StackPanel>

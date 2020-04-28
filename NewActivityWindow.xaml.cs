@@ -21,14 +21,43 @@ namespace Time_organization
     public partial class NewActivityWindow : Window
     {
         private ObservableCollection<Activity> _history;
+        private ObservableCollection<string> _optionsAvailable;
         public NewActivityWindow(ObservableCollection<Activity> history)
         {
             InitializeComponent();
             _history = history;
+            _optionsAvailable = initializeOptionsAvailable();
+
+            DataContext = _optionsAvailable;
 
             var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
             this.Left = desktopWorkingArea.Right - this.Width;
             this.Top = desktopWorkingArea.Bottom - this.Height;
+        }
+
+        /// <summary>
+        /// Intialization of options available to be selected
+        /// </summary>
+        /// <returns>available options</returns>
+        private ObservableCollection<string> initializeOptionsAvailable()
+        {
+            ObservableCollection<string> options = new ObservableCollection<string>();
+            options.Add("Śniadanie");
+            options.Add("Obiad");
+            options.Add("Naczynia");
+            options.Add("Blender");
+            options.Add("Fusion 360");
+            options.Add("C# - nauka");
+            options.Add("C# - projekt");
+            options.Add("Cosinus");
+            options.Add("Modelarstwo");
+            options.Add("Gra komputerowa");
+            options.Add("Pianino");
+            options.Add("Ćwiczenia fizyczne");
+            options.Add("Pomoc innym");
+            options.Add("Inne");
+
+            return options;
         }
 
         private void startActivity_button_Click(object sender, RoutedEventArgs e)
@@ -40,7 +69,8 @@ namespace Time_organization
                 Activity activity = new Activity()
                 {
                     Name = activityName_comboBox.Text,
-                    PlannedMinutesDuration = timeDuration
+                    PlannedMinutesDuration = timeDuration,
+                    Note = note_textbox.Text
                 };
 
                 MainWindow mainWindow = new MainWindow(activity, _history);

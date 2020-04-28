@@ -29,7 +29,7 @@
             <ItemsControl ItemsSource="{Binding}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding}" Foreground="{Binding Color}"/>
+                        <TextBlock Text="{Binding}"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
