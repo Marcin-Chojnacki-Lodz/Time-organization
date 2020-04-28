@@ -12,10 +12,17 @@ namespace Time_organization
         public DateTime StartTime { get; set; }
         public int PlannedMinutesDuration { get; set; }
         public int ActualMinutesDuration { get; set; }
+        public int Color { get; set; }
 
         public Activity()
         {
             StartTime = DateTime.Now;
+            Color = Convert.ToInt32("FF0000", 16);
+        }
+
+        public override string ToString()
+        {
+            return $"{this.Name} - {this.StartTime.ToString("HH:mm")}\n Czas trwania: {this.ActualMinutesDuration} min";
         }
 
         /// <summary>

@@ -26,6 +26,7 @@
             <ComboBoxItem>Gra komputerowa</ComboBoxItem>
             <ComboBoxItem>Pianino</ComboBoxItem>
             <ComboBoxItem>Ćwiczenia fizyczne</ComboBoxItem>
+            <ComboBoxItem>Pomoc innym</ComboBoxItem>
             <Separator/>
             <ComboBoxItem>Inne</ComboBoxItem>
         </ComboBox>

@@ -20,8 +20,8 @@ namespace Time_organization
     /// </summary>
     public partial class NewActivityWindow : Window
     {
-        private ObservableCollection<string> _history;
-        public NewActivityWindow(ObservableCollection<string> history)
+        private ObservableCollection<Activity> _history;
+        public NewActivityWindow(ObservableCollection<Activity> history)
         {
             InitializeComponent();
             _history = history;

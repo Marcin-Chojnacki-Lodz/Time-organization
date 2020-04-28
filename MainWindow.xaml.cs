@@ -24,8 +24,7 @@ namespace Time_organization
     {
         Activity _activity;
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        private ObservableCollection<string> _history = new ObservableCollection<string>();
-        private bool msgBxShow;
+        private ObservableCollection<Activity> _history = new ObservableCollection<Activity>();
 
         public MainWindow()
         {
@@ -38,7 +37,7 @@ namespace Time_organization
             DataContext = _history;
         }
 
-        public MainWindow(Activity activity, ObservableCollection<string> history)
+        public MainWindow(Activity activity, ObservableCollection<Activity> history)
         {
             InitializeComponent();
 
@@ -49,8 +48,6 @@ namespace Time_organization
 
             DataContext = _history;
 
-            msgBxShow = true;
-
             updateTimes();
         }
 
@@ -59,7 +56,7 @@ namespace Time_organization
             if (_activity != null)
             {
                 _activity.ActualMinutesDuration = _activity.secondsInProgress() / 60;
-                _history.Add($"{_activity.Name} - {_activity.StartTime.ToString("HH:mm")}\n Czas trwania: {_activity.ActualMinutesDuration} min");
+                _history.Add(_activity);
             }
 
             NewActivityWindow newActivityWindow = new NewActivityWindow(_history);
@@ -105,15 +102,9 @@ namespace Time_organization
             durationTime_label.Content = $"    {hours} h {minutes} min {seconds} s";
             progress_progressBar.Value = secondsInProgress;
 
-            if (secondsInProgress / 60 == _activity.PlannedMinutesDuration && msgBxShow)
-            {
-                MessageBox.Show("Założony czas dobiegł końca");
-            }
-
             if (secondsInProgress / 60 >= _activity.PlannedMinutesDuration)
             {
-                this.Title = "Następna aktywność. :)";
-                msgBxShow = false;
+                this.Title = $"Koniec. {hours}:{minutes}";
             }
             else
             {
