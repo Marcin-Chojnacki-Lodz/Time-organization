@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Time_organization
 {
@@ -42,20 +32,24 @@ namespace Time_organization
         private ObservableCollection<string> initializeOptionsAvailable()
         {
             ObservableCollection<string> options = new ObservableCollection<string>();
-            options.Add("Śniadanie");
-            options.Add("Obiad");
-            options.Add("Naczynia");
-            options.Add("Blender");
-            options.Add("Fusion 360");
-            options.Add("C# - nauka");
-            options.Add("C# - projekt");
-            options.Add("Cosinus");
-            options.Add("Modelarstwo");
-            options.Add("Gra komputerowa");
-            options.Add("Pianino");
-            options.Add("Ćwiczenia fizyczne");
-            options.Add("Pomoc innym");
-            options.Add("Inne");
+            string fileName = "availableOptions.txt";
+            string filePath = $"{Environment.CurrentDirectory}\\{fileName}";
+            if (File.Exists(filePath))
+            {
+                string[] optionsInFile = File.ReadAllLines(filePath);
+                foreach (var line in optionsInFile)
+                {
+                    options.Add(line);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Plik z opcjami nie istnieje. Ładuję domyślne");
+
+                options.Add("Rzecz pozytywna");
+                options.Add("Rzecz neutralna");
+                options.Add("Rzecz negatywna");
+            }
 
             return options;
         }
