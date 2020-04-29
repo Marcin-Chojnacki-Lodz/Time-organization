@@ -22,6 +22,8 @@
             <ProgressBar x:Name="progress_progressBar"
                 Minimum="0" Maximum="100" Value="25" Height="10px"/>
             <Rectangle Height="20px"/>
+            <Button x:Name="pauseContinue_button"
+                    Content="|| Pauza" Click="pauseContinue_button_Click"/>
             <Button x:Name="newActivity_button"
                 Content="Nowa aktywność" Click="newActivity_button_Click"/>
         </StackPanel>
@@ -29,7 +31,10 @@
             <ItemsControl ItemsSource="{Binding}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding}"/>
+                        <StackPanel>
+                            <TextBlock Text="{Binding}"/>
+                            <Separator/>
+                        </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

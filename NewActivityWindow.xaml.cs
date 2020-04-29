@@ -12,6 +12,11 @@ namespace Time_organization
     {
         private ObservableCollection<Activity> _history;
         private ObservableCollection<string> _optionsAvailable;
+
+        /*
+         * Constructor
+         */
+
         public NewActivityWindow(ObservableCollection<Activity> history)
         {
             InitializeComponent();
@@ -24,6 +29,38 @@ namespace Time_organization
             this.Left = desktopWorkingArea.Right - this.Width;
             this.Top = desktopWorkingArea.Bottom - this.Height;
         }
+
+        /*
+         * Button click methods
+         */
+
+        private void startActivity_button_Click(object sender, RoutedEventArgs e)
+        {
+            int timeDuration = 0;
+
+            if (activityName_comboBox.SelectedIndex >= 0 && int.TryParse(time_textbox.Text, out timeDuration) && timeDuration > 0)
+            {
+                Activity activity = new Activity()
+                {
+                    Name = activityName_comboBox.Text,
+                    PlannedMinutesDuration = timeDuration,
+                    Note = note_textbox.Text
+                };
+
+                MainWindow mainWindow = new MainWindow(activity, _history);
+                mainWindow.Show();
+
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Wybierz aktywność i podaj zakładany czas.");
+            }
+        }
+
+        /*
+         * Additional methods
+         */
 
         /// <summary>
         /// Intialization of options available to be selected
@@ -52,26 +89,6 @@ namespace Time_organization
             }
 
             return options;
-        }
-
-        private void startActivity_button_Click(object sender, RoutedEventArgs e)
-        {
-            int timeDuration = 0;
-
-            if (activityName_comboBox.SelectedIndex >= 0 && int.TryParse(time_textbox.Text, out timeDuration) && timeDuration > 0)
-            {
-                Activity activity = new Activity()
-                {
-                    Name = activityName_comboBox.Text,
-                    PlannedMinutesDuration = timeDuration,
-                    Note = note_textbox.Text
-                };
-
-                MainWindow mainWindow = new MainWindow(activity, _history);
-                mainWindow.Show();
-
-                this.Close();
-            }
         }
     }
 }

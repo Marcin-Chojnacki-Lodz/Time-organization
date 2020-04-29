@@ -12,28 +12,31 @@ namespace Time_organization
         public DateTime StartTime { get; set; }
         public int PlannedMinutesDuration { get; set; }
         public int ActualMinutesDuration { get; set; }
+        public int PauseSecondsDuration { get; set; }
         public string Note { get; set; }
 
         public Activity()
         {
             StartTime = DateTime.Now;
+            PauseSecondsDuration = 0;
         }
 
         public override string ToString()
         {
             if (Note != null && Note != "")
-                return $"{Name} - {StartTime.ToString("HH:mm")}\n Czas trwania: {ActualMinutesDuration} min\n {Note}";
+                return $"{Name} - {StartTime.ToString("HH:mm")}\n Czas trwania: {ActualMinutesDuration} min / {PauseSecondsDuration} s pauzy\n {Note}";
             else
-                return $"{Name} - {StartTime.ToString("HH:mm")}\n Czas trwania: {ActualMinutesDuration} min";
+                return $"{Name} - {StartTime.ToString("HH:mm")}\n Czas trwania: {ActualMinutesDuration} min / {PauseSecondsDuration} s pauzy";
         }
 
         /// <summary>
         /// Calculates how long activity takes place
         /// </summary>
         /// <returns>Amount of time activity takes place until now</returns>
-        public int secondsInProgress()
+        public int secondsInProgress(int secondsOfPause)
         {
-            return (int)(DateTime.Now - StartTime).TotalSeconds;
+            PauseSecondsDuration += secondsOfPause;
+            return (int)(DateTime.Now - StartTime).TotalSeconds - secondsOfPause;
         }
     }
 }
