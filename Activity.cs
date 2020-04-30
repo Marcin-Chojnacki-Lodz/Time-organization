@@ -24,9 +24,9 @@ namespace Time_organization
         public override string ToString()
         {
             if (Note != null && Note != "")
-                return $"{Name} - {StartTime.ToString("HH:mm")}\n Czas trwania: {ActualMinutesDuration} min / {PauseSecondsDuration} s pauzy\n {Note}";
+                return $"{Name} - {StartTime.ToString("HH:mm")}\n Czas trwania: {ActualMinutesDuration} min / {PauseSecondsDuration/60} s pauzy\n {Note}";
             else
-                return $"{Name} - {StartTime.ToString("HH:mm")}\n Czas trwania: {ActualMinutesDuration} min / {PauseSecondsDuration} s pauzy";
+                return $"{Name} - {StartTime.ToString("HH:mm")}\n Czas trwania: {ActualMinutesDuration} min / {PauseSecondsDuration/60} s pauzy";
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Time_organization
         public int secondsInProgress(int secondsOfPause)
         {
             PauseSecondsDuration += secondsOfPause;
-            return (int)(DateTime.Now - StartTime).TotalSeconds - secondsOfPause;
+            return (int)(DateTime.Now - StartTime).TotalSeconds - PauseSecondsDuration;
         }
     }
 }

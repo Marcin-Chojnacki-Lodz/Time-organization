@@ -96,6 +96,7 @@ namespace Time_organization
             else
             {
                 activityTimer.Stop();
+                this.Title = "Pauza";
 
                 //pauseTimer.Tick += new EventHandler(pauseTimer_Tick);
                 //pauseTimer.Interval = new TimeSpan(0, 0, 1);
@@ -147,6 +148,7 @@ namespace Time_organization
         private void updateTimes()
         {
             int secondsInProgress = _activity.secondsInProgress(pauseTime);
+            pauseTime = 0;
             int hours, minutes, seconds;
 
             hours = secondsInProgress / 3600;
